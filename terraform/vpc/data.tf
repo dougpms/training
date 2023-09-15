@@ -1,6 +1,6 @@
 data "aws_region" "current" {}
 data "aws_availability_zone" "az" {
-  name = "eu-west-2a"
+  name = "eu-west-1a"
 }
 data "aws_caller_identity" "current" {}
 # For VPC tracing previously created

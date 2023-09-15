@@ -11,8 +11,8 @@ terraform {
     }
   }
 #  backend "s3" {
-#    bucket = "exercise-state-bucket"
+#    bucket = "exercise-st-bucket"
 #    key = "terraform.tfstate"
-#    region = "eu-west-2"
+#    region = "eu-west-1"
 #  }
 }
