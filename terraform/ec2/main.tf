@@ -36,7 +36,6 @@ resource "aws_instance" "base_instance" {
     device_index         = 0
   }
   user_data = data.template_file.startup.rendered
-  key_name = "test-user"
   tags = local.tags
 }
 
