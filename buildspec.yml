@@ -12,7 +12,7 @@ phases:
   build:
     commands:
       - echo 'Build phase'
-      - terraform init -no-color -chdir=ecr
+      - terraform -chdir=ecr init
       - terraform apply -auto-approve
 
 cache:
