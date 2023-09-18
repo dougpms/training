@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "internal_training" {
-  name                 = "internal_training_${terraform.workspace}}"
+  name                 = "internal_training_${terraform.workspace}"
   image_tag_mutability = "MUTABLE"
   force_delete = "true"
 
