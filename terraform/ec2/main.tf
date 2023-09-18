@@ -26,13 +26,14 @@ module "vpc" {
 
 # EC2 instance
 resource "aws_instance" "base_instance" {
+  count = var.instance_numbers
   depends_on = [aws_network_interface.base_interface]
   ami           = data.aws_ami.amazon-2.id
   instance_type = var.instance_size
   availability_zone = data.aws_availability_zone.az.name
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
   network_interface {
-    network_interface_id = aws_network_interface.base_interface.id
+    network_interface_id = aws_network_interface.base_interface[count.index].id
     device_index         = 0
   }
   user_data = data.template_file.startup.rendered
@@ -42,13 +43,15 @@ resource "aws_instance" "base_instance" {
 ## Network logic from here on
 
 resource "aws_network_interface" "base_interface" {
+  count       = var.instance_numbers
   subnet_id   = module.vpc.subnet_id_private
   tags = local.tags
 }
 
 resource "aws_network_interface_sg_attachment" "sg_attachment" {
+  count = var.instance_numbers
   depends_on = [module.vpc]
-  network_interface_id = aws_network_interface.base_interface.id
+  network_interface_id = aws_network_interface.base_interface[count.index].id
   security_group_id    = module.vpc.sg_name
 }
 
