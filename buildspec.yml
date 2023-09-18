@@ -12,8 +12,8 @@ phases:
   build:
     commands:
       - echo 'Build phase'
-      - ls -la
-      - pwd
+      - terraform -chdir=terraform/ecr init
+      - terraform -chdir=terraform/ecr apply -auto-approve
 
 cache:
   paths:
