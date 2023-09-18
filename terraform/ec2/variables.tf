@@ -16,10 +16,6 @@ variable "ebs_encrypted" {
   default = "false"
 }
 
-# Used as work-around IAM limitations from V1 sandbox account / NOT RECOMMENDED IN PROD ENVS
-variable "iam_super_power" {
-  default = "AWSRDSCustomCloudWatchRole"
-}
 
 variable "permission_boundary" {
   default = "arn:aws:iam::783050088916:policy/UKDDCAWSRestrictedAdmin-PermBoundary"
