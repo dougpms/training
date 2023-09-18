@@ -11,20 +11,10 @@ phases:
       - terraform --version
   build:
     commands:
-      - aws s3 cp s3://exercise-st-bucket/directory.json .
-      - available_directories=$(jq -r '.directories[]' parameter.json)
-      - echo "Available directories: $available_directories"
-      - read -p "Select a directory: " selected_directory
-      - if [[ ! " $available_directories " =~ " $selected_directory " ]]; then
-          echo "Invalid directory selection."
-          exit 1
-        fi
-      - export TARGET_DIR="$selected_directory"
       - echo 'Build phase'
       - terraform -chdir=terraform/ecr init
       - terraform -chdir=terraform/ecr apply -auto-approve
       - terraform -chdir=terraform/ecr destroy -auto-approve
-
 
 
 cache:
