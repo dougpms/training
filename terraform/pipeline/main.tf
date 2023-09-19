@@ -4,8 +4,9 @@
 #}
 
 resource "aws_codepipeline" "terraform_pipeline" {
-  name = "terraform-pipeline"
-  role_arn = aws_iam_role.codebuild_role.arn
+  for_each = local.env_list
+  name = "terraform-pipeline-${each.key}"
+  role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {
     location = var.s3_artifactory
@@ -17,15 +18,15 @@ resource "aws_codepipeline" "terraform_pipeline" {
     action {
       name            = "SourceAction"
       category        = "Source"
-      owner           = "ThirdParty"
-      provider        = "GitHub"
+      owner           = "AWS"
+      provider        = "CodeStarSourceConnection"
       version         = "1"
       output_artifacts = ["source_output"]
 
       configuration = {
-        Owner      = "dougpms"
-        Repo       = "training"
-        Branch     = "main"  # Replace with your desired branch
+        ConnectionArn    = aws_codestarconnections_connection.github.arn
+        FullRepositoryId  = "dougpms/training"
+        BranchName     = "main"
       }
     }
   }
@@ -41,8 +42,15 @@ resource "aws_codepipeline" "terraform_pipeline" {
       input_artifacts = ["source_output"]
 
       configuration = {
-        ProjectName = aws_codebuild_project.terraform_build.name
+        ProjectName = "terraform_build_${terraform.workspace}-${each.key}"
+
       }
     }
   }
+}
+
+
+resource "aws_codestarconnections_connection" "github" {
+  name          = "GitHubRepo"
+  provider_type = "GitHub"
 }

@@ -12,9 +12,9 @@ phases:
   build:
     commands:
       - echo 'Build phase'
-      - terraform -chdir=terraform/ecr init
-      - terraform -chdir=terraform/ecr apply -auto-approve
-      - terraform -chdir=terraform/ecr destroy -auto-approve
+      - terraform -chdir=terraform/$PIPE_NAME init
+      - terraform -chdir=terraform/$PIPE_NAME apply -auto-approve
+      - terraform -chdir=terraform/$PIPE_NAME destroy -auto-approve
 
 
 cache:

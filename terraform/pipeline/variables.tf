@@ -25,4 +25,5 @@ locals {
       Name = "internal_training_${terraform.workspace}"
       Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
   }
+  env_list = toset(var.pipeline_list)
 }
