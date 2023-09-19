@@ -15,9 +15,15 @@ variable "s3_artifactory" {
   default = "exercise-st-bucket"
 }
 
+variable "pipeline_list" {
+  type = list(string)
+  default = ["ec2", "ecr", "asg", "k8s"]
+}
+
 locals {
   tags = {
       Name = "internal_training_${terraform.workspace}"
       Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
   }
+  env_list = toset(var.pipeline_list)
 }
