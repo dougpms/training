@@ -1,6 +1,6 @@
 ##Creates a IAM role for EC2
 resource "aws_iam_role" "ec2_role" {
-  name = "ec2_${terraform.workspace}_role"
+  name                 = "ec2_${terraform.workspace}_role"
   permissions_boundary = var.permission_boundary
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -21,13 +21,13 @@ resource "aws_iam_role" "ec2_role" {
 
 # IAM policy for the role above
 resource "aws_iam_policy" "ec2_policy" {
-  policy  = data.aws_iam_policy_document.ec2_p_document.json
-  name = "S3_${terraform.workspace}_policy"
+  policy = data.aws_iam_policy_document.ec2_p_document.json
+  name   = "S3_${terraform.workspace}_policy"
 }
 
 # Generate the json blob for the policy above (S3 access for SSM session)
 data "aws_iam_policy_document" "ec2_p_document" {
-statement {
+  statement {
     sid = "1"
 
     actions = [

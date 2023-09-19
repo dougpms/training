@@ -31,11 +31,11 @@ variable "ingress_rules" {
 
   default = {
     tls_from_vpc = {
-      description      = "SSH to the box"
-      from_port        = 22
-      to_port          = 22
-      protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"]
+      description = "SSH to the box"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
     }
     # Add more ingress rules as needed
   }
@@ -51,10 +51,10 @@ variable "egress_rules" {
 
   default = {
     allow_all = {
-      from_port        = 0
-      to_port          = 0
-      protocol         = "-1"
-      cidr_blocks      = ["0.0.0.0/0"]
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
     }
     # Add more egress rules as needed
   }
@@ -62,7 +62,7 @@ variable "egress_rules" {
 
 locals {
   tags = {
-      Name = "internal_training_${terraform.workspace}"
-      Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
+    Name  = "internal_training_${terraform.workspace}"
+    Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
   }
 }
