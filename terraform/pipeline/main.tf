@@ -5,7 +5,7 @@
 
 resource "aws_codepipeline" "terraform_pipeline" {
   for_each = local.env_list
-  name = "terraform-pipeline-${each.key}"
+  name     = "terraform-pipeline-${each.key}"
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {
@@ -16,17 +16,17 @@ resource "aws_codepipeline" "terraform_pipeline" {
   stage {
     name = "Source"
     action {
-      name            = "SourceAction"
-      category        = "Source"
-      owner           = "AWS"
-      provider        = "CodeStarSourceConnection"
-      version         = "1"
+      name             = "SourceAction"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
       output_artifacts = ["source_output"]
 
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.github.arn
-        FullRepositoryId  = "dougpms/training"
-        BranchName     = "main"
+        FullRepositoryId = "dougpms/training"
+        BranchName       = "main"
       }
     }
   }

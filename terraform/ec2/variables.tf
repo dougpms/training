@@ -1,6 +1,6 @@
 variable "instance_size" {
   description = "Instance size"
-  default = "t2.micro"
+  default     = "t2.micro"
 }
 
 variable "instance_numbers" {
@@ -9,7 +9,7 @@ variable "instance_numbers" {
 
 variable "ebs_size" {
   description = "EBS size"
-  default = "40"
+  default     = "40"
 }
 
 variable "ebs_encrypted" {
@@ -27,7 +27,7 @@ variable "ssm_policy" {
 
 locals {
   tags = {
-      Name = "internal_training_${terraform.workspace}"
-      Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
+    Name  = "internal_training_${terraform.workspace}"
+    Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
   }
 }
