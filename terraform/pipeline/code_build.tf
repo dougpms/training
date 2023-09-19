@@ -16,12 +16,10 @@ resource "aws_codebuild_project" "terraform_build" {
  }
 
   source {
-    type            = "GITHUB"
-    location        = "https://github.com/dougpms/training.git"
-    git_clone_depth = 1
+    type            = "CODEPIPELINE"
   }
 
   artifacts {
-    type = "NO_ARTIFACTS"
+    type = "CODEPIPELINE"
   }
 }
