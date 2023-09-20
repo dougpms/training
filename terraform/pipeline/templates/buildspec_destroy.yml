@@ -14,7 +14,6 @@ phases:
       - echo 'Build phase'
       - cd terraform/$PIPE_NAME
       - terraform  init
-      - terraform workspace new pipeline_$TERRAFORM_WORKSPACE
       - terraform workspace select pipeline_$TERRAFORM_WORKSPACE
       - terraform  destroy -auto-approve
 
