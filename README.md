@@ -12,9 +12,6 @@
 brew install saml2aws
 brew install tfenv
 ```
-<img width="150" alt="AWS Logo" src="https://d0.awsstatic.com/logos/powered-by-aws.png">
-<img width="150" alt="AWS Logo" src="https://sue.eu/wp-content/uploads/sites/6/2022/06/terraform-hashicorp-logo-920x920-sue-v5-400x400.png">
-
 
 Sample SAML2 config file (request for other member of the team for a reference)
 
@@ -63,4 +60,3 @@ tfenv use 1.3.3
 
 Within the Terraform folder there are several modules that will be explained further in this README.
 The concept behind it was build some child-modules that can be deployed alone or as part of root-module (i.e /vpc and /ec2).
-
