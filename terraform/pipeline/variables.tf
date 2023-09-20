@@ -20,10 +20,15 @@ variable "pipeline_list" {
   default = ["ec2", "ecr", "asg", "k8s"]
 }
 
+variable "pipename" {
+  default = ""
+}
+
 locals {
   tags = {
     Name  = "internal_training_${terraform.workspace}"
     Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
   }
   env_list = toset(var.pipeline_list)
+  pipeline_name = var.pipename == 0 ? terraform.workspace : "default"
 }
