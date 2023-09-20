@@ -12,7 +12,7 @@ phases:
   build:
     commands:
       - echo 'Build phase'
-      - cd terraform/pipeline
+      - cd terraform/pipeline; ls -la
       - sed -i 's/replace/$TERRAFORM_WORKSPACE/g' terraform.tfvars
       - terraform workspace new pipeline_$TERRAFORM_WORKSPACE
       - terraform workspace select pipeline_$TERRAFORM_WORKSPACE
