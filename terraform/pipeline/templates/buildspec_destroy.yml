@@ -12,11 +12,11 @@ phases:
   build:
     commands:
       - echo 'Build phase'
+      - cd terraform/$PIPE_NAME
+      - terraform  init
       - terraform workspace new pipeline_$TERRAFORM_WORKSPACE
       - terraform workspace select pipeline_$TERRAFORM_WORKSPACE
-      - terraform -chdir=terraform/$PIPE_NAME init
-      - terraform -chdir=terraform/$PIPE_NAME destroy -auto-approve
-
+      - terraform  destroy -auto-approve
 
 cache:
   paths:
