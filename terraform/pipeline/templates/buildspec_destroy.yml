@@ -14,7 +14,7 @@ phases:
       - echo 'Build phase'
       - terraform workspace new pipeline
       - terraform -chdir=terraform/$PIPE_NAME init
-      - terraform -chdir=terraform/$PIPE_NAME apply -auto-approve
+      - terraform -chdir=terraform/$PIPE_NAME destroy -auto-approve
 
 
 cache:
