@@ -1,5 +1,5 @@
 resource "aws_iam_role" "codebuild_role" {
-  name                 = "codebuild-terraform-role"
+  name                 = "codebuild-terraform-role-${terraform.workspace}"
   permissions_boundary = var.permission_boundary
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -22,7 +22,7 @@ resource "aws_iam_role_policy_attachment" "codebuild_policy_attach" {
 }
 
 resource "aws_iam_role" "codepipeline_role" {
-  name                 = "codepipeline-terraform-role"
+  name                 = "codepipeline-terraform-role-${terraform.workspace}"
   permissions_boundary = var.permission_boundary
   assume_role_policy = jsonencode({
     Version = "2012-10-17",

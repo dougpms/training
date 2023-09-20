@@ -15,9 +15,11 @@ variable "s3_artifactory" {
   default = "exercise-st-bucket"
 }
 
+# Use just the variables that you want to create the pipelines
 variable "pipeline_list" {
   type    = list(string)
   default = ["ec2", "ecr", "asg", "k8s"]
+#  default = ["ec2", "ecr", "asg", "k8s"]
 }
 
 variable "pipename" {

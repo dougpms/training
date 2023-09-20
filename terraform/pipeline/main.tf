@@ -1,8 +1,3 @@
-## Creates ECR repo for potential use
-#module "ecr" {
-#  source = "../ecr"
-#}
-
 resource "aws_codepipeline" "terraform_pipeline" {
   for_each = local.env_list
   name     = "terraform-pipeline-${terraform.workspace}-${each.key}"

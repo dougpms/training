@@ -1,4 +1,6 @@
-########### WIP#############
+----
+This is training repo with AWS oriented with several other tools to
+----
 
 
 
