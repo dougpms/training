@@ -13,6 +13,10 @@ resource "aws_codebuild_project" "terraform_build" {
       name  = "PIPE_NAME"
       value = each.key
     }
+    environment_variable {
+      name  = "TERRAFORM_WORKSPACE"
+      value = "${terraform.workspace}"
+    }
   }
 
   source {
