@@ -5,7 +5,7 @@
 
 resource "aws_codepipeline" "terraform_pipeline" {
   for_each = local.env_list
-  name     = "terraform-pipeline-${each.key}"
+  name     = "terraform-pipeline-${terraform.workspace}-${each.key}"
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {
@@ -51,7 +51,7 @@ resource "aws_codepipeline" "terraform_pipeline" {
 
 resource "aws_codepipeline" "terraform_pipeline_destroy" {
   for_each = local.env_list
-  name     = "terraform-pipeline-destroy-${each.key}"
+  name     = "terraform-pipeline-destroy-${terraform.workspace}-${each.key}"
   role_arn = aws_iam_role.codepipeline_role.arn
 
   artifact_store {

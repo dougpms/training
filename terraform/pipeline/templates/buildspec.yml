@@ -12,7 +12,8 @@ phases:
   build:
     commands:
       - echo 'Build phase'
-      - terraform workspace new pipeline
+      - terraform workspace new pipeline_$TERRAFORM_WORKSPACE
+      - terraform workspace select pipeline_$TERRAFORM_WORKSPACE
       - terraform -chdir=terraform/$PIPE_NAME init
       - terraform -chdir=terraform/$PIPE_NAME apply -auto-approve
 
