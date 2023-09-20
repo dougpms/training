@@ -1,13 +1,13 @@
 ----
 
-This is training repo with AWS oriented with several other tools.
+### This is training repo with AWS oriented with several other tools.
 
 ----
 ## Requirements
-Docker
-AWS CLI
-Terraform (Recommended Tfenv)
-Saml2Aws
+* Docker
+* AWS CLI
+* Terraform (Recommended Tfenv)
+* Saml2Aws
 ```
 brew install saml2aws
 brew install tfenv
