@@ -78,7 +78,7 @@ locals {
 
   az_subnet_map_pub = {
     for az in var.az_asg :
-    az => cidrsubnet(aws_vpc.base_1.cidr_block, 4, index(var.az_asg, az))
+    az => cidrsubnet(aws_vpc.base_1.cidr_block, 4, index(var.az_asg, az) + 1)
   }
   az_asg = var.az_number == 0 ? data.aws_availability_zone.az.name : "eu-west-1a"
 }

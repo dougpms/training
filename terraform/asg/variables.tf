@@ -1,4 +1,4 @@
-variable "instace_size" {
+variable "instance_size" {
   default = "t2.micro"
 }
 
