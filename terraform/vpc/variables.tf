@@ -6,6 +6,11 @@ variable "region_number" {
   }
 }
 
+variable "az_asg" {
+  default = ["eu-west-1a"]
+
+}
+
 variable "az_number" {
   # Assign a number to each AZ letter used in our configuration
   default = {
@@ -60,9 +65,20 @@ variable "egress_rules" {
   }
 }
 
+
 locals {
   tags = {
     Name  = "internal_training_${terraform.workspace}"
     Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
   }
+  az_subnet_map = {
+    for az in var.az_asg :
+    az => cidrsubnet(aws_vpc.base_1.cidr_block, 6, index(var.az_asg, az))
+  }
+
+  az_subnet_map_pub = {
+    for az in var.az_asg :
+    az => cidrsubnet(aws_vpc.base_1.cidr_block, 4, index(var.az_asg, az))
+  }
+  az_asg = var.az_number == 0 ? data.aws_availability_zone.az.name : "eu-west-1a"
 }
