@@ -25,9 +25,14 @@ variable "ssm_policy" {
   default = "arn:aws:iam::aws:policy/AmazonSSMManagedEC2InstanceDefaultPolicy"
 }
 
+variable "module_suffix" {
+  default = ""
+  description = "To be used in root modules and changing the naming for VPC"
+}
+
 locals {
   tags = {
-    Name  = "internal_training_${terraform.workspace}"
+    Name  = "internal_training_${terraform.workspace}${var.module_suffix}"
     Owner = join("", [data.aws_caller_identity.current.id, "_", terraform.workspace])
   }
 }
