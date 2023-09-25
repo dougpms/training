@@ -1,6 +1,7 @@
 # Include SG - If need amending, using locally as variable replacing the current in the child module. Examples commented out.
 module "vpc" {
   source = "../vpc"
+  module_suffix = "_ec2_module"
   #  ingress_rules = {
   #   type = map(object({
   #    description = string
@@ -40,11 +41,11 @@ resource "aws_instance" "base_instance" {
   tags      = local.tags
 }
 
-## Network logic from here on
+## Network logic from here on for SSM connect
 
 resource "aws_network_interface" "base_interface" {
   count     = var.instance_numbers
-  subnet_id = module.vpc.subnet_id_private
+  subnet_id = module.vpc.subnet_id_private[0]
   tags      = local.tags
 }
 
@@ -79,18 +80,18 @@ resource "aws_route_table" "ec2_rt_private" {
 }
 
 resource "aws_route_table_association" "ec2_internet" {
-  subnet_id      = module.vpc.subnet_id_public
+  subnet_id      = module.vpc.subnet_id_public[0]
   route_table_id = aws_route_table.ec2_rt.id
 }
 
 resource "aws_route_table_association" "ec2_internet_private" {
-  subnet_id      = module.vpc.subnet_id_private
+  subnet_id      = module.vpc.subnet_id_private[0]
   route_table_id = aws_route_table.ec2_rt_private.id
 }
 
 resource "aws_nat_gateway" "ec2_nat_gateway" {
   allocation_id = aws_eip.ec2.id
-  subnet_id     = module.vpc.subnet_id_public
+  subnet_id     = module.vpc.subnet_id_public[0]
   tags          = local.tags
 }
 
