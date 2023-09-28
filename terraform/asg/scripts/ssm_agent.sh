@@ -17,4 +17,5 @@ if [ $? -eq 0 ];
     echo "SSMAgent failed"; exit 1
 fi
 
-
+# Config Index HTML for each box to identify LB action
+echo $(hostname) | xargs -i sed -i 's/nginx!/{}/g' /usr/share/nginx/html/index.html
