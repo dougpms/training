@@ -2,7 +2,7 @@
 module "vpc" {
   source = "../vpc"
 # Limited to 2 AZ in this case due to External IP  needed in the code
-  az_asg = ["eu-west-1a" ,"eu-west-1b"]
+  az_asg = ["eu-west-1a", "eu-west-1b"]
   module_suffix = "_asg_module"
 
 }
