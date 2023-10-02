@@ -1,0 +1,130 @@
+Requirements
+2 RDS instances (Mysql - small)
+EC2 module (with 1 instance)
+
+
+Description:
+As a developer to execute DB maintenance from my EC2 instances In order to keep my application running
+
+Acceptance criteria:
+Stories:
+
+Story 1
+Given running RDS instance
+When I run my DB script written in Python
+Then All the DB information is deployed in one instance
+
+Story 2
+
+Given an empty DB instance
+When any new entry happens in the non-empty DB
+Then the script will copy any new entry to the initially empty DB
+
+
+Technical notes:
+Story 1 will use a script in the EC2 box
+Story 2 should use Lambda to run from time to time and detect changes in the DB (using Python as well)
+For story 2, using queue system or manually triggered by Story 1 it is accepted
+
+References:
+Lambda reference
+https://docs.aws.amazon.com/lambda/latest/dg/lambda-python.html
+RDS
+https://aws.amazon.com/free/database/?trk=3e81b95c-b8bf-45a3-99c3-294160dab128&sc_channel=ps&ef_id=Cj0KCQjw1OmoBhDXARIsAAAYGSGBwLp1-b3u-zyt4V44oCBHOK9a4Kh9SbHBIqzirxXvi9ANgBAG00AaAvXxEALw_wcB:G:s&s_kwcid=AL!4422!3!638305085730!e!!g!!aws%20rds!19096959797!147590861961
+
+
+
+Script SQL
+
+```
+-- Create the 'names' table
+CREATE TABLE names (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+
+-- Populate the 'names' table with 20 records
+INSERT INTO names (first_name, last_name)
+VALUES
+    ('John', 'Doe'),
+    ('Jane', 'Smith'),
+    ('Michael', 'Johnson'),
+    ('Emily', 'Wilson'),
+    ('William', 'Brown'),
+    ('Sophia', 'Davis'),
+    ('David', 'Lee'),
+    ('Olivia', 'Miller'),
+    ('James', 'Garcia'),
+    ('Emma', 'Martinez'),
+    ('Joseph', 'Clark'),
+    ('Ava', 'Taylor'),
+    ('Robert', 'Anderson'),
+    ('Mia', 'Hernandez'),
+    ('Charles', 'White'),
+    ('Madison', 'Martin'),
+    ('Daniel', 'Lewis'),
+    ('Grace', 'Harris'),
+    ('Andrew', 'Thompson'),
+    ('Chloe', 'Walker');
+
+-- Create the 'number' table
+CREATE TABLE number (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    phone_number VARCHAR(20)
+);
+
+-- Populate the 'number' table with 20 records
+INSERT INTO number (phone_number)
+VALUES
+    ('555-123-4567'),
+    ('555-987-6543'),
+    ('555-555-5555'),
+    ('555-456-7890'),
+    ('555-789-1234'),
+    ('555-321-6540'),
+    ('555-234-5678'),
+    ('555-876-5432'),
+    ('555-432-1098'),
+    ('555-890-1234'),
+    ('555-567-8901'),
+    ('555-234-5678'),
+    ('555-678-9012'),
+    ('555-543-2109'),
+    ('555-345-6789'),
+    ('555-987-6543'),
+    ('555-456-7890'),
+    ('555-321-6540'),
+    ('555-234-5678'),
+    ('555-876-5432');
+
+-- Create the 'age' table
+CREATE TABLE age (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    age INT
+);
+
+-- Populate the 'age' table with 20 records
+INSERT INTO age (age)
+VALUES
+    (25),
+    (30),
+    (22),
+    (28),
+    (35),
+    (29),
+    (31),
+    (27),
+    (23),
+    (26),
+    (32),
+    (24),
+    (33),
+    (30),
+    (28),
+    (26),
+    (27),
+    (29),
+    (31),
+    (34);
+```
