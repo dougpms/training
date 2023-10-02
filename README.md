@@ -83,6 +83,7 @@ Just keep in mind each module can be amended to fit specific needs as you go alo
 * EC2
   * Deploy a specific numbers of EC2 instance, using VPC module as a child module
   * Enable and install SSM agent allowing console login avoiding extra exposure for testing
+  * Attach an EBS volume for persistence
 * ECR
   * Create an ECR repository to be used as part of image testing
 * Pipeline
