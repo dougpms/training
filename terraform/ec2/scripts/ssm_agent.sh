@@ -9,3 +9,4 @@ if [ $? -eq 0 ];
   else
     echo "SSMAgent failed"; exit 1
 fi
+sudo yum install apache2 -y
