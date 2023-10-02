@@ -1,1 +1,16 @@
-Exercise to use pipeline to destroy all workspaces that ITSRE uses on daily basis
+Description:
+As a developer I want to make sure all my resources are destroyed in the AWS account In order to keep costs under control
+
+Acceptance criteria:
+Stories:
+Given any resource created by this repository
+When a new day comes (midnight)
+Then all resources will be destroyed
+
+Technical notes:
+Lambda running Python with Boto3 are a good approach for this. Also you can fetch the resource list in the Terraform state in the S3 bucket in order to make script more efficient
+
+References:
+Lambda reference
+https://docs.aws.amazon.com/lambda/latest/dg/lambda-python.html
+

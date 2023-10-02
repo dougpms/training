@@ -1,3 +1,19 @@
-Create ecr scan policies
-fetch image name
-script/method so instance can access ECR images internally if needed
+Description:
+As a developer I want to create standard image In order to track all packages and versions in use by my stack
+
+Acceptance criteria:
+Stories:
+Given a new image
+When I push it to a ECR
+Then it will get scanned with all security best practices
+
+AND
+
+Given a new EC2 (ECS) instance
+When it gets created
+Then this stable version (which should not be hard-coded)
+
+Technical notes:
+This exercise can be executed using the ECR and EC2 modules
+Images should be tagged to be used
+Use AWS tools to check and store the AMI information and security checks
