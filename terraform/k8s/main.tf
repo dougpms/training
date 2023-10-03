@@ -27,7 +27,7 @@ resource "aws_eks_cluster" "k8s_training" {
   role_arn = aws_iam_role.k8s_role.arn
 
   vpc_config {
-    subnet_ids = [module.vpc.subnet_id_private]
+    subnet_ids = [module.vpc.subnet_id_private[1], module.vpc.subnet_id_private[0]]
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
