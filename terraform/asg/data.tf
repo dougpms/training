@@ -13,3 +13,7 @@ data "aws_ami" "amazon-2" {
   }
   owners = ["amazon"]
 }
+
+data "template_file" "startup" {
+  template = file("${path.module}/scripts/ssm_agent.sh")
+}
