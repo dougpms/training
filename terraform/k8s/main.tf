@@ -38,7 +38,7 @@ resource "aws_eks_cluster" "k8s_training" {
 resource "aws_eks_node_group" "k8s_training_node_group" {
   cluster_name    = aws_eks_cluster.k8s_training.name
   node_group_name = "nodegroup_${terraform.workspace}_k8s${var.module_suffix}"
-  node_role_arn   = aws_iam_role.k8s_role.arn
+  node_role_arn   = aws_iam_role.node_role.arn
   subnet_ids      = module.vpc.subnet_id_private
 
   scaling_config {
