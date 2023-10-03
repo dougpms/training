@@ -29,3 +29,8 @@ resource "aws_iam_role_policy_attachment" "admin_policy_attach" {
   policy_arn = var.admin_policy
   role       = aws_iam_role.k8s_role.name
 }
+
+resource "aws_iam_role_policy_attachment" "ec2_policy_attach" {
+  policy_arn = var.ec2_policy
+  role       = aws_iam_role.k8s_role.name
+}

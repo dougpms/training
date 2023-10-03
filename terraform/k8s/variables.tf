@@ -18,6 +18,10 @@ variable "admin_policy" {
   default = "arn:aws:iam::aws:policy/AdministratorAccess"
 }
 
+variable "ec2_policy" {
+  default = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
 locals {
   tags = {
     Name   = "internal_training_${terraform.workspace}${var.module_suffix}"
