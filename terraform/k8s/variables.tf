@@ -22,6 +22,10 @@ variable "ec2_policy" {
   default = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
+variable "worker_node" {
+  default = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+}
+
 locals {
   tags = {
     Name   = "internal_training_${terraform.workspace}${var.module_suffix}"

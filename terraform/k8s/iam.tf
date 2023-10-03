@@ -64,12 +64,12 @@ resource "aws_iam_role_policy_attachment" "node_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
-resource "aws_iam_role_policy_attachment" "admin_policy_attach_node" {
-  policy_arn = var.admin_policy
+resource "aws_iam_role_policy_attachment" "ec2_policy_attach_node" {
+  policy_arn = var.ec2_policy
   role       = aws_iam_role.node_role.name
 }
 
-resource "aws_iam_role_policy_attachment" "ec2_policy_attach_node" {
-  policy_arn = var.ec2_policy
+resource "aws_iam_role_policy_attachment" "eks_policy_attach_node" {
+  policy_arn = var.worker_node
   role       = aws_iam_role.node_role.name
 }
