@@ -14,6 +14,10 @@ variable "ssm_policy" {
   default = "arn:aws:iam::aws:policy/AmazonSSMManagedEC2InstanceDefaultPolicy"
 }
 
+variable "admin_policy" {
+  default = "arn:aws:iam::aws:policy/AdministratorAccess"
+}
+
 locals {
   tags = {
     Name   = "internal_training_${terraform.workspace}${var.module_suffix}"

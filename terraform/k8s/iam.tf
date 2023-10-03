@@ -1,6 +1,6 @@
 ##Creates a IAM role for EC2
 resource "aws_iam_role" "k8s_role" {
-  name                 = "ec2_${terraform.workspace}_role${var.module_suffix}"
+  name                 = "k8s_${terraform.workspace}_role${var.module_suffix}"
   permissions_boundary = var.permission_boundary
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -23,4 +23,9 @@ resource "aws_iam_role" "k8s_role" {
 resource "aws_iam_role_policy_attachment" "eks_policy" {
   role       = aws_iam_role.k8s_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "admin_policy_attach" {
+  policy_arn = var.admin_policy
+  role       = aws_iam_role.k8s_role.name
 }
