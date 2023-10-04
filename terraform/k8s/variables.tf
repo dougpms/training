@@ -26,6 +26,13 @@ variable "worker_node" {
   default = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
 
+variable "iam_policy_boundary" {
+  type    = map(string)
+  default = {
+    "policy_arn" = "arn:aws:iam::783050088916:policy/UKDDCAWSRestrictedAdmin-PermBoundary"
+  }
+}
+
 locals {
   tags = {
     Name   = "internal_training_${terraform.workspace}${var.module_suffix}"
