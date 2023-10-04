@@ -30,17 +30,45 @@ module "eks_cluster" {
   subnets             = module.vpc.subnet_id_private
   vpc_id              = module.vpc.vpc_id
   cluster_endpoint_private_access = true
-  worker_groups = [
-    {
-      instance_type = "t2.micro"  # Specify the desired instance type for your worker nodes
-      asg_max_size  = 1
-      asg_min_size  = 1
-    },
-    # Add more worker group configurations as needed
-  ]
+  cluster_endpoint_public_access  = false
+  eks_managed_node_group_defaults = {
+    disk_size = 20
+  }
+  eks_managed_node_groups = {
+    general = {
+      desired_size = 1
+      min_size     = 1
+      max_size     = 1
+
+      labels = {
+        role = "general"
+      }
+
+      instance_types = ["t3.small"]
+      capacity_type  = "ON_DEMAND"
+    }
+
+    spot = {
+      desired_size = 1
+      min_size     = 1
+      max_size     = 1
+
+      labels = {
+        role = "spot"
+      }
+
+      taints = [{
+        key    = "market"
+        value  = "spot"
+        effect = "NO_SCHEDULE"
+      }]
+
+      instance_types = ["t3.micro"]
+      capacity_type  = "SPOT"
+    }
+  }
 
   tags = {
-    Terraform   = "true"
-    Environment = terraform.workspace
+    Environment = "staging"
   }
 }
