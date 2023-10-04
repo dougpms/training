@@ -27,7 +27,7 @@ module "eks_cluster" {
   source              = "terraform-aws-modules/eks/aws"
   cluster_name        = "cluster_${terraform.workspace}_k8s${var.module_suffix}"
   cluster_version     = "1.28"  # Choose the desired Kubernetes version
-  subnets             = module.vpc.subnet_id_private
+  subnet_ids          = module.vpc.subnet_id_private
   vpc_id              = module.vpc.vpc_id
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = false
